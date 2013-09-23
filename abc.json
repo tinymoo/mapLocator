@@ -1,0 +1,14 @@
+{
+    "name": "mapLocator",
+    "version": "1.0",
+    "desc": "",
+    "cover": "",
+    "tag":"alimap",
+    "author": {
+        "name": "牧云",
+        "email": "muyun.my@taobao.com",
+        "page": ""
+    },
+    "type": "kissy-gallery",
+    "type-url": "http://gallery.kissyui.com/guide"
+}
