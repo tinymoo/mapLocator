@@ -34,11 +34,11 @@ KISSY.add(function (S, Node, Base) {
          * @class MapLocator
          * @constructor
          * @extends Base
-         * @param {object} config 参数对象
          * @param {Node | DOMNode | string} config.mapContainer 地图容器
-         * @param {Array.<number>} latLng 默认的经纬度，表示经纬度数值的数组，格式为[纬度,经度]
-         * @param {string} address 默认的地址
-         * @desc 默认值的受理优先级是，latLng > address > 客户端位置
+         * @param {object} config 参数对象
+         * @param {object} config.mapConfig 地图实例化参数
+         * @param {object} config.markerConfig 标注实例化参数
+         * @param {object} config.infoWindowConfig 信息浮窗实例化参数
          */
         function MapLocator (mapContainer, config) {
             MapLocator.superclass.constructor.call(this, config);
@@ -62,7 +62,7 @@ KISSY.add(function (S, Node, Base) {
                 marker.setLatLng(latLng);
                 infoWindow.setLatLng(latLng);
 
-                map.centerAndZoom(latLng, 15);
+                map.centerAndZoom(latLng, 10);
 
                 map.addOverlay(marker);
                 map.addOverlay(infoWindow);
@@ -73,10 +73,10 @@ KISSY.add(function (S, Node, Base) {
                 /**
                  * 渲染地图wrap
                  * @param {object} config
-                 * @param {object} config.address 地址
                  * @param {object} config.latLng 经纬度
                  * @param {number} config.latLng.lat 纬度
                  * @param {number} config.latLng.lng 经度
+                 * @param {string} config.address 地址
                  * @param {boolean} config.cleanCache 是否强制重新请求阿里云地图脚本
                  */
                 render: function (config) {
@@ -132,10 +132,12 @@ KISSY.add(function (S, Node, Base) {
                         mapLocator.fire('ready');
                     } else {
                         // 使用IP定位初始化地图中心位置
-                        Jla.require('Ali.Map.Mod.IpView', 3, function () {
-                            mapLocator.set('latLng', MapLocator.latLngCTO(map.getCenter()));
-                            mapLocator.fire('ready');
-                        }, [map]);
+                        Jla.require('Ali.Map.Mod.IpView', 3, function () {}, [map, {
+                            onChange: function (latLng) {
+                                mapLocator.set('latLng', MapLocator.latLngCTO(latLng));
+                                mapLocator.fire('ready');
+                            }
+                        }]);
                     }
 
                 },
