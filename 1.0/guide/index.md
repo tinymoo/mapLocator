@@ -54,7 +54,9 @@ mapLocator基于[阿里云js组件](http://ditu.aliyun.com/jsdoc/)，让用户�
 {object} 参数
 
 config.mapConfig {object} [地图实例化参数](http://ditu.aliyun.com/jsdoc/map/classes/AliMap.html#constructor)
+
 config.markerConfig {object} [标注实例化参数](http://ditu.aliyun.com/jsdoc/map/classes/AliMarker.html#constructor)
+
 config.infoWindowConfig {object} [信息浮窗实例化参数](http://ditu.aliyun.com/jsdoc/map/classes/AliInfoWindow.html#constructor)
 
 ### 属性
@@ -84,12 +86,17 @@ config.infoWindowConfig {object} [信息浮窗实例化参数](http://ditu.aliyu
 #### render(config)
 
 初始化地图，如果有提供参数，按照参数定位标注。
+
 优先级从高到底为经纬度，地址（自动将地址转化成经纬度），否则按客户端当前ip初始化。
+
 可以执行多次，每次会先销毁旧数据，重新初始化。
 
 config {object}
+
 config.latLng {object} 经纬度数据
+
 config.address {string}
+
 config.cleanCache {boolean} 是否强制重新请求阿里云地图脚本
 
 #### locateByAddress(address)
