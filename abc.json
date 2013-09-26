@@ -1,9 +1,9 @@
 {
     "name": "mapLocator",
     "version": "1.0",
-    "desc": "",
+    "desc": "地图定位组件",
     "cover": "",
-    "tag":"alimap",
+    "tag":"map",
     "author": {
         "name": "牧云",
         "email": "muyun.my@taobao.com",
